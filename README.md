@@ -264,8 +264,8 @@ This project satisfies:
 
 ---
 
-## ⭐ Support
+## 👨‍💻 Author (Anurup Datta)
 
-If you like this project:
+* Application Developer
+* AI Engineer
 
-👉 Give it a **star ⭐ on GitHub**
