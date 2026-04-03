@@ -264,15 +264,6 @@ This project satisfies:
 
 ---
 
-## 👨‍💻 Author
-
-**Anurup Datta**
-
-* Full Stack Developer
-* AI & Data Science Enthusiast
-
----
-
 ## ⭐ Support
 
 If you like this project:
