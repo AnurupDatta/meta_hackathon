@@ -1,6 +1,8 @@
 # 🌱 AgriAgent Arena (OpenEnv Compatible)
 
 An interactive **Reinforcement Learning (RL) environment** for smart farming, built using **Gym standards + OpenEnv format**, where multiple agents compete to optimize crop health.
+<img width="2879" height="1551" alt="image" src="https://github.com/user-attachments/assets/ca5f4783-4b07-42f5-a683-96bf752d15bf" />
+<img width="2879" height="1548" alt="image" src="https://github.com/user-attachments/assets/38564c68-4a64-4b52-ba0d-093ae9409e30" />
 
 ---
 
