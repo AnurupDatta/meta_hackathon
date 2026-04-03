@@ -1,70 +1,115 @@
-# 🌱 AgriAgent Arena
+# 🌱 AgriAgent Arena (OpenEnv Compatible)
 
-An interactive **AI-powered farming simulation platform** where multiple agents learn and compete to optimize crop health using **Reinforcement Learning (RL)** concepts.
+An interactive **Reinforcement Learning (RL) environment** for smart farming, built using **Gym standards + OpenEnv format**, where multiple agents compete to optimize crop health.
 
 ---
 
 ## 🚀 Project Overview
 
-**AgriAgent Arena** simulates a smart farming environment where agents make decisions such as:
+**AgriAgent Arena** is a simulation environment where AI agents learn to manage a farm by taking actions such as:
 
 * 💧 Irrigation
 * 🧪 Pest Control
 * 🌿 Fertilization
 
-Each action impacts the environment and generates a **reward**, enabling agents to improve their strategies over time.
+Each decision affects the environment and produces a **reward**, allowing agents to optimize their strategies over time.
 
 ---
 
-## 🧠 Key Features
+## 🧠 Key Highlights
+
+### ✅ OpenEnv + Gym Compatible
+
+* Fully follows **Gym-style API**
+* Supports:
+
+  * `reset()`
+  * `step(action)`
+  * `action_space`
+  * `observation_space`
+* Ready for OpenEnv evaluation
+
+---
 
 ### 🤖 Multi-Agent System
 
-* 👤 **Human Agent** → Manual control
-* 🚜 **Agent 1** → Always irrigates
-* 🎲 **Agent 2** → Random actions
-* 🧠 **PPO Agent** → Smart decision-making policy
+* 👤 Human-controlled agent
+* 🚜 Irrigation agent (rule-based)
+* 🎲 Random agent
+* 🧠 PPO-style intelligent agent
 
 ---
 
-### 📊 Performance Visualization
+### 📊 Real-Time Visualization
 
-* Real-time **reward graph**
-* 🥇 Best agent highlighted automatically
-* Easy comparison of agent performance
+* Multi-agent reward comparison graph
+* 🥇 Best agent automatically highlighted
+* Performance tracking across episodes
 
 ---
 
 ### 🏆 Leaderboard System
 
-* Tracks agent scores
-* Displays **top-performing agent**
+* Tracks agent performance
+* Displays top-performing agent
 * Updates dynamically
 
 ---
 
-### 🎮 Interactive UI
+### 🎮 Interactive Dashboard
 
-Built using **Gradio**, featuring:
+Built using **Gradio UI**:
 
-* Environment state display
+* Environment state visualization
 * Action controls
-* Performance graph
-* Leaderboard
+* Reward tracking
+* Leaderboard display
 
 ---
 
-### ⚙️ OpenEnv-style API
+## ⚙️ Environment Design
 
-* `/reset` → Initialize environment
-* `/step` → Take action
-* `/leaderboard` → View rankings
+### 🔄 RL Loop
+
+```bash
+State → Action → Reward → New State → Repeat
+```
+
+---
+
+### 📥 State (Observation Space)
+
+```bash
+[soil_moisture, crop_health, pest_level]
+```
+
+* Range: 0 – 100
+
+---
+
+### 🎯 Actions (Action Space)
+
+| Action | Description  |
+| ------ | ------------ |
+| 0      | 💧 Irrigate  |
+| 1      | 🧪 Spray     |
+| 2      | 🌿 Fertilize |
+
+---
+
+### 🏆 Reward Function
+
+```bash
+Reward = Crop Health - Pest Level
+```
+
+👉 Goal: Maximize crop health while minimizing pests
 
 ---
 
 ## 🏗️ Project Structure
 
-```
+```bash
 agri-agent-arena/
 │
 ├── app.py                  # Main FastAPI app
@@ -73,42 +118,30 @@ agri-agent-arena/
 │   └── routes.py           # API endpoints
 │
 ├── env/
-│   └── crop_env.py         # Environment simulation
+│   └── crop_env.py         # OpenEnv-compatible environment
 │
 ├── agents/
 │   ├── basic_agents.py     # Rule-based agents
-│   └── ppo_agent.py        # Smart PPO-style agent
+│   └── ppo_agent.py        # PPO-style policy agent
 │
 ├── utils/
 │   ├── leaderboard.py      # Ranking system
-│   └── plotting.py         # Graph visualization
+│   └── plotting.py         # Visualization logic
 │
 ├── ui/
 │   └── gradio_ui.py        # Interactive dashboard
 │
+├── openenv.yaml            # OpenEnv configuration ⭐
+├── Dockerfile              # Container setup ⭐
 ├── requirements.txt
-└── Dockerfile
+└── README.md
 ```
-
----
-
-## ⚙️ How It Works
-
-### 🔄 Reinforcement Learning Loop
-
-```
-State → Action → Reward → New State → Repeat
-```
-
-* **State** → Soil moisture, Crop health, Pest level
-* **Action** → Irrigate / Spray / Fertilize
-* **Reward** → Crop Health - Pest Level
 
 ---
 
 ## 🧪 How to Run Locally
 
-### 1️⃣ Clone the Repository
+### 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/your-username/agri-agent-arena.git
@@ -117,7 +150,7 @@ cd agri-agent-arena
 
 ---
 
-### 2️⃣ Create Virtual Environment
+### 2️⃣ Create Environment
 
 ```bash
 conda create -n agri python=3.10
@@ -134,7 +167,7 @@ pip install -r requirements.txt
 
 ---
 
-### 4️⃣ Run the Server
+### 4️⃣ Run Server
 
 ```bash
 uvicorn app:app --reload
@@ -142,11 +175,11 @@ uvicorn app:app --reload
 
 ---
 
-### 5️⃣ Open the UI
+### 5️⃣ Open UI
 
 👉 Open in browser:
 
-```
+```bash
 http://127.0.0.1:8000/ui
 ```
 
@@ -157,7 +190,7 @@ http://127.0.0.1:8000/ui
 1. Click **Reset**
 2. Try:
 
-   * 👤 Human actions
+   * 👤 Manual actions
    * 🤖 AI agents
 3. Observe:
 
@@ -167,9 +200,9 @@ http://127.0.0.1:8000/ui
 
 ---
 
-## 🧠 PPO Agent (Smart Strategy)
+## 🧠 PPO Agent Strategy
 
-The PPO-style agent uses a **state-based decision policy**:
+The PPO-style agent uses a simple policy:
 
 * High pest → 🧪 Spray
 * Low soil → 💧 Irrigate
@@ -177,11 +210,13 @@ The PPO-style agent uses a **state-based decision policy**:
 
 ---
 
-## 📊 Example Behavior
+## 📊 Expected Results
 
-* 🧠 PPO Agent → Highest reward 📈
-* 🎲 Random Agent → Unstable 📉
-* 🚜 Irrigate Agent → Suboptimal
+| Agent        | Performance |
+| ------------ | ----------- |
+| 🧠 PPO Agent | Best 📈     |
+| 🎲 Random    | Unstable    |
+| 🚜 Irrigate  | Suboptimal  |
 
 ---
 
@@ -190,28 +225,40 @@ The PPO-style agent uses a **state-based decision policy**:
 * Smart Agriculture 🌾
 * Resource Optimization 💧
 * Autonomous AI Systems 🤖
-* Decision Intelligence Platforms
+* RL Research & Experimentation
 
 ---
 
-## 🚀 Future Improvements
+## 🚀 Deployment (Hugging Face Spaces)
 
-* ✅ Real PPO training (Stable-Baselines3)
-* 📊 Live training visualization
+This project is fully ready for deployment:
+
+* ✅ Dockerized
+* ✅ OpenEnv compatible
+* ✅ UI ready
+
+👉 Deploy using **Gradio + Docker** on Hugging Face Spaces
+
+---
+
+## 🏆 Hackathon Alignment
+
+This project satisfies:
+
+* ✅ RL Environment Design
+* ✅ OpenEnv Compatibility
+* ✅ Reward Engineering
+* ✅ Interactive Visualization
+* ✅ Scalable Architecture
+
+---
+
+## 🔮 Future Improvements
+
+* 🧠 Real PPO training (Stable-Baselines3)
+* 📊 Live training graphs
 * 💾 Persistent leaderboard (database)
-* 🌐 Hugging Face Spaces deployment
-
----
-
-## 🏆 Hackathon Value
-
-This project demonstrates:
-
-* Reinforcement Learning concepts
-* Multi-agent comparison
-* Real-time visualization
-* API + UI integration
-* Scalable architecture
+* 🎯 Scenario-based simulations
 
 ---
 
@@ -223,3 +270,9 @@ This project demonstrates:
 * AI & Data Science Enthusiast
 
 ---
+
+## ⭐ Support
+
+If you like this project:
+
+👉 Give it a **star ⭐ on GitHub**
